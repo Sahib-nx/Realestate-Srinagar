@@ -87,8 +87,6 @@ export default function AboutPage() {
   const ctaRef = useScrollReveal<HTMLDivElement>({ y: 20 })
 
   // ── Hero entrance animation ───────────────────────────────────────
-  // Image: slow Ken Burns scale from 1.08 → 1.0
-  // Content children: stagger up from y:30, opacity:0
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: 'cubic-bezier(0.16, 1, 0.3, 1)' } })
 
@@ -134,12 +132,6 @@ export default function AboutPage() {
 
   return (
     <div>
-
-      {/* ── Page Hero ─────────────────────────────────────────────────
-          Mobile:  h-[50vh] min-h-[340px] — keeps it tall enough on short screens
-          Image:   Ken Burns scale entrance + fade in
-          Content: breadcrumb + h1 + subtitle stagger in
-      ──────────────────────────────────────────────────────────────── */}
       <section className="relative flex h-[50vh] min-h-[340px] items-center justify-center overflow-hidden sm:h-[55vh]">
         <img
           ref={heroImageRef}
@@ -182,18 +174,6 @@ export default function AboutPage() {
           >
             Independent. Full service. Fiduciary real estate representation.
           </p>
-
-          {/* Subtle scroll cue */}
-          <div
-            className="mt-8 flex flex-col items-center gap-1.5 sm:mt-10"
-            style={{ opacity: 0 }}
-          >
-            <span className="font-['Inter'] text-[11px] uppercase tracking-[0.1em] text-white/50">Scroll</span>
-            <svg width="16" height="24" viewBox="0 0 16 24" fill="none" className="animate-bounce text-white/40">
-              <rect x="0.75" y="0.75" width="14.5" height="22.5" rx="7.25" stroke="currentColor" strokeWidth="1.5" />
-              <circle cx="8" cy="8" r="2" fill="currentColor" className="animate-[scrollDot_1.5s_ease-in-out_infinite]" />
-            </svg>
-          </div>
         </div>
       </section>
 

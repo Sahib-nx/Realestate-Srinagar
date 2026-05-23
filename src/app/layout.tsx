@@ -8,8 +8,7 @@ import Footer from '@/components/Footer'
 import ScrollIndicator from '@/components/ScrollIndicator'
 import CustomCursor from '@/components/CustomCursor'
 import NoiseOverlay from '@/components/NoiseOverlay'
-
-import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider'
+import ScrollToTopProvider from '@/components/providers/ScrollToTopProvider'  // ← add this
 
 const inter = Inter({
   subsets: ['latin'],
@@ -36,16 +35,16 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${newsreader.variable} relative min-h-screen bg-white`}
       >
-        <SmoothScrollProvider>
-          <Navigation />
+          <ScrollToTopProvider> 
+            <Navigation />
 
-          <main>{children}</main>
+            <main>{children}</main>
 
-          <Footer />
-          <ScrollIndicator />
-          <CustomCursor />
-          <NoiseOverlay />
-        </SmoothScrollProvider>
+            <Footer />
+            <ScrollIndicator />
+            <CustomCursor />
+            <NoiseOverlay />
+          </ScrollToTopProvider>
       </body>
     </html>
   )

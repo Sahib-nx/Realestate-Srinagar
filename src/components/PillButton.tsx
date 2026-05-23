@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 interface PillButtonProps {
   children: React.ReactNode
@@ -8,11 +8,19 @@ interface PillButtonProps {
   className?: string
 }
 
-export default function PillButton({ children, href, onClick, variant = 'outline', className = '' }: PillButtonProps) {
-  const baseStyles = 'inline-block rounded-full px-7 py-3 font-["Inter"] text-[13px] font-medium uppercase tracking-[0.05em] transition-all duration-200 cursor-pointer'
+export default function PillButton({
+  children,
+  href,
+  onClick,
+  variant = 'outline',
+  className = '',
+}: PillButtonProps) {
+  const baseStyles =
+    'inline-block rounded-full px-7 py-3 font-["Inter"] text-[13px] font-medium uppercase tracking-[0.05em] transition-all duration-200 cursor-pointer'
 
   const variants = {
-    outline: 'border border-[#00523C] text-[#00523C] hover:bg-[#00523C] hover:text-white',
+    outline:
+      'border border-[#00523C] text-[#00523C] hover:bg-[#00523C] hover:text-white',
     filled: 'bg-[#00523C] text-white hover:bg-[#00402e]',
     white: 'bg-white text-[#00523C] hover:bg-[#f5f5f5]',
   }
@@ -21,7 +29,7 @@ export default function PillButton({ children, href, onClick, variant = 'outline
 
   if (href) {
     return (
-      <Link to={href} className={classes}>
+      <Link href={href} className={classes}>
         {children}
       </Link>
     )

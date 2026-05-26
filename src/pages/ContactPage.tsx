@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -158,6 +159,15 @@ export default function ContactPage() {
           >
             Whether you&apos;re buying, selling, or simply exploring, our team is here to guide you.
           </p>
+
+          {/* Breadcrumb for SEO */}
+          <nav aria-label="Breadcrumb" className="mt-6 sm:mt-8">
+            <ol className="flex items-center gap-2 font-['Inter'] text-[11px] text-white/40 sm:text-[12px]">
+              <li><Link href="/" className="hover:text-white/70 transition-colors">Home</Link></li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-white/70">Contact Us</li>
+            </ol>
+          </nav>
         </div>
       </section>
 
@@ -286,7 +296,7 @@ export default function ContactPage() {
                   {status === 'error' && (
                     <div className="mb-6 flex items-start gap-3 rounded-xl border border-red-100 bg-red-50 px-4 py-3.5">
                       <svg className="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                        <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
                       </svg>
                       <p className="font-['Inter'] text-[13px] text-red-700">{errorMsg}</p>
                     </div>
@@ -387,11 +397,10 @@ export default function ContactPage() {
                     />
                     <label
                       htmlFor="message"
-                      className={`pointer-events-none absolute left-0 font-['Inter'] text-[13px] transition-all duration-200 ${
-                        focused === 'message' || form.message
+                      className={`pointer-events-none absolute left-0 font-['Inter'] text-[13px] transition-all duration-200 ${focused === 'message' || form.message
                           ? 'top-0 text-[11px] uppercase tracking-[0.05em] text-[#00523C]'
                           : 'top-6 text-[#888888]'
-                      }`}
+                        }`}
                     >
                       Your Message *
                     </label>
@@ -410,7 +419,7 @@ export default function ContactPage() {
                       {status === 'loading' ? (
                         <>
                           <svg className="animate-spin" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
                           </svg>
                           Sending…
                         </>
@@ -525,9 +534,8 @@ function FloatingInput({ label, name, type = 'text', value, onChange, focused, s
       />
       <label
         htmlFor={name}
-        className={`pointer-events-none absolute left-0 font-['Inter'] transition-all duration-200 ${
-          active ? 'top-0 text-[11px] uppercase tracking-[0.05em] text-[#00523C]' : 'top-6 text-[13px] text-[#888888]'
-        }`}
+        className={`pointer-events-none absolute left-0 font-['Inter'] transition-all duration-200 ${active ? 'top-0 text-[11px] uppercase tracking-[0.05em] text-[#00523C]' : 'top-6 text-[13px] text-[#888888]'
+          }`}
       >
         {label}{required ? ' *' : ''}
       </label>
@@ -564,9 +572,8 @@ function FloatingSelect({ label, name, value, options, onChange, focused, setFoc
       </select>
       <label
         htmlFor={name}
-        className={`pointer-events-none absolute left-0 font-['Inter'] transition-all duration-200 ${
-          active ? 'top-0 text-[11px] uppercase tracking-[0.05em] text-[#00523C]' : 'top-6 text-[13px] text-[#888888]'
-        }`}
+        className={`pointer-events-none absolute left-0 font-['Inter'] transition-all duration-200 ${active ? 'top-0 text-[11px] uppercase tracking-[0.05em] text-[#00523C]' : 'top-6 text-[13px] text-[#888888]'
+          }`}
       >
         {label}
       </label>

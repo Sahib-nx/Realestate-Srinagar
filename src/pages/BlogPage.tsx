@@ -64,6 +64,15 @@ export default function BlogPage() {
             Achievements, market intelligence, and real estate advice from Srinagar's most trusted
             independent brokerage.
           </p>
+
+          {/* Breadcrumb for SEO */}
+          <nav aria-label="Breadcrumb" className="mt-6 sm:mt-8">
+            <ol className="flex items-center gap-2 font-['Inter'] text-[11px] text-[#00523C] sm:text-[12px]">
+              <li><Link href="/" className="hover:text-white/70 transition-colors">Home</Link></li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-[#00523C]">Blog</li>
+            </ol>
+          </nav>
         </div>
       </div>
 
@@ -75,11 +84,10 @@ export default function BlogPage() {
               <button
                 key={cat}
                 onClick={() => setActive(cat)}
-                className={`flex-shrink-0 rounded-full px-4 py-2 font-['Inter'] text-[12px] font-medium uppercase tracking-[0.05em] transition-all duration-200 sm:text-[13px] ${
-                  active === cat
+                className={`flex-shrink-0 rounded-full px-4 py-2 font-['Inter'] text-[12px] font-medium uppercase tracking-[0.05em] transition-all duration-200 sm:text-[13px] ${active === cat
                     ? 'bg-[#00523C] text-white'
                     : 'text-[#888888] hover:text-[#212121]'
-                }`}
+                  }`}
               >
                 {cat}
               </button>

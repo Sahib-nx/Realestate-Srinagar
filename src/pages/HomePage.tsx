@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SectionHeader from '../components/SectionHeader'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import type { Neighborhood } from '../types'
+import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -24,10 +25,16 @@ const services = [
   },
   {
     number: '03',
-    title: 'Market Intelligence',
+    title: 'Construction & Development',
     description:
-      "Data-driven insights into Srinagar's most desirable neighborhoods. We provide comprehensive market analysis to inform your most important real estate decisions.",
+      "Turn your vision into reality with our dedicated construction services. We manage residential and commercial projects from the ground up. By combining modern engineering standards with an appreciation for local aesthetics, we ensure structural integrity, timely delivery, and exceptional design.",
   },
+  // {
+  //   number: '03',
+  //   title: 'Market Intelligence',
+  //   description:
+  //     "Data-driven insights into Srinagar's most desirable neighborhoods. We provide comprehensive market analysis to inform your most important real estate decisions.",
+  // },
 ]
 
 const neighborhoods: Neighborhood[] = [
@@ -146,9 +153,12 @@ export default function HomePage() {
           </div>
 
           <div className="mt-10 sm:mt-16 sm:text-center">
-            <button className="w-full rounded-full border border-[#00523C] px-7 py-3.5 font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] text-[#00523C] transition-all duration-200 hover:bg-[#00523C] hover:text-white sm:w-auto">
+            <Link
+              href="/service"
+              className="inline-block w-full rounded-full border border-[#00523C] px-7 py-3.5 font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] text-[#00523C] transition-all duration-200 hover:bg-[#00523C] hover:text-white text-center sm:w-auto"
+            >
               Learn More About Our Services
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -175,19 +185,34 @@ export default function HomePage() {
                 Srinagar&apos;s Independent Luxury Brokerage
               </h2>
               <p className="mt-4 font-['Inter'] text-[15px] leading-relaxed text-[#212121] sm:mt-6 sm:text-base">
-                Since 2014, Realestate Srinagar Real Estate has served Srinagar's most discerning buyers and sellers
-                with a simple philosophy: independent counsel, uncompromising service, and deep local
-                expertise. We are not a franchise. We are your fiduciary.
+                Since 2017, Realestate Srinagar has been redefining property marketing through innovation and digital reach.
+                Recognized as one of the early real estate brands to bring digitalization to the Srinagar property market.
               </p>
+
+              <div className="mt-4 sm:mt-5">
+                <p className="font-['Inter'] text-[11px] font-medium uppercase tracking-[0.08em] text-[#00523C] sm:text-[12px]">
+                  Locations We Serve
+                </p>
+                <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1.5">
+                  {['Srinagar', 'Jammu', 'Delhi', 'Dholera', 'Dubai'].map((city) => (
+                    <span
+                      key={city}
+                      className="font-['Inter'] text-[13px] text-[#212121] sm:text-[14px]"
+                    >
+                      {city}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
               <div className="mt-6 flex items-start gap-4 sm:mt-8 sm:gap-8">
                 <div className="flex-1 min-w-0">
-                  <p className="font-['Newsreader'] text-3xl font-light text-[#00523C] sm:text-4xl">14+</p>
+                  <p className="font-['Newsreader'] text-3xl font-light text-[#00523C] sm:text-4xl">9+</p>
                   <p className="mt-1 font-['Inter'] text-[12px] text-[#888888] sm:text-[13px]">Years</p>
                 </div>
                 <div className="w-px self-stretch bg-[#ECECEC]" />
                 <div className="flex-1 min-w-0">
-                  <p className="font-['Newsreader'] text-3xl font-light text-[#00523C] sm:text-4xl">$500M+</p>
+                  <p className="font-['Newsreader'] text-3xl font-light text-[#00523C] sm:text-4xl">100Cr+</p>
                   <p className="mt-1 font-['Inter'] text-[12px] text-[#888888] sm:text-[13px]">In Sales</p>
                 </div>
                 <div className="w-px self-stretch bg-[#ECECEC]" />
@@ -247,7 +272,7 @@ export default function HomePage() {
               ))}
             </div>
 
-            
+
             <div
               className="pointer-events-none absolute right-0 top-0 hidden h-full w-[60px] sm:block"
               style={{ background: 'linear-gradient(to right, transparent, #F8F8F8)' }}
@@ -272,11 +297,6 @@ export default function HomePage() {
             Monthly market reports, neighborhood insights, and exclusive listings delivered to your inbox.
           </p>
 
-          {/*
-            Email row:
-            Mobile  → stacked column, input full width, button full width
-            sm+     → side by side row
-          */}
           <div className="mx-auto mt-6 flex max-w-[480px] flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
             <input
               type="email"

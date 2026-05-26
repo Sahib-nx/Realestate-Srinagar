@@ -147,7 +147,7 @@ export default function AboutPage() {
           }}
         />
 
-        
+
         <div ref={heroContentRef} className="relative z-10 flex flex-col items-center px-5 text-center sm:px-6">
           {/* Breadcrumb */}
           <p
@@ -197,31 +197,26 @@ export default function AboutPage() {
                 Founded on Independence
               </h2>
               <p className="mt-4 font-['Inter'] text-[15px] leading-[1.7] text-[#212121] sm:mt-6 sm:text-base">
-                Realestate Srinagar Real Estate was founded in 2014 with a clear purpose: to provide
-                Srinagar&apos;s most discerning clients with independent, fiduciary-focused real estate
-                representation. In a market increasingly dominated by franchise brokerages with competing
-                interests, we chose a different path.
+                Founded on Independence & Global Reach
+                Realestate Srinagar was founded in 2017 by Mr. Khan with a clear purpose, to provide our most discerning clients with independent, fiduciary focused real estate representation.
+                In a market increasingly dominated by traditional brokerages with competing interests, he chose a different path.
               </p>
               <p className="mt-4 font-['Inter'] text-[15px] leading-[1.7] text-[#212121] sm:text-base">
-                Our founders believed that real estate clients deserve the same standard of care that
-                legal and financial clients receive — undivided loyalty, complete transparency, and
-                advice guided exclusively by the client&apos;s best interests.
+                Mr. Khan believed that real estate clients deserve the same standard of care that legal and financial clients receive, undivided loyalty, complete transparency, and advice guided exclusively by the client's best interests.
               </p>
               <p className="mt-4 font-['Inter'] text-[15px] leading-[1.7] text-[#212121] sm:text-base">
-                Over the past fourteen years, we have grown from a boutique two-agent practice to one
-                of Srinagar&apos;s most respected independent brokerages, with over $500 million in sales
-                and a client satisfaction record that speaks for itself.
+                Over the past nine years, we have grown from a boutique practice to one of the region's most respected independent brokerages. While our roots remain deeply embedded in Kashmir, our expertise now spans across prime markets. Today, we proudly guide our clients through premier real estate investments and property dealings across Srinagar, Jammu, Delhi, Dholera, and Dubai, all while maintaining a client satisfaction record that speaks for itself.
               </p>
 
               {/* Stats — same pattern as HomePage, same mobile treatment */}
               <div className="mt-8 flex items-start gap-4 sm:mt-10 sm:gap-8">
                 <div className="flex-1 min-w-0">
-                  <p className="font-['Newsreader'] text-3xl font-light text-[#00523C] sm:text-4xl">2014</p>
+                  <p className="font-['Newsreader'] text-3xl font-light text-[#00523C] sm:text-4xl">2017</p>
                   <p className="mt-1 font-['Inter'] text-[12px] text-[#888888] sm:text-[13px]">Founded</p>
                 </div>
                 <div className="w-px self-stretch bg-[#ECECEC]" />
                 <div className="flex-1 min-w-0">
-                  <p className="font-['Newsreader'] text-3xl font-light text-[#00523C] sm:text-4xl">$500M+</p>
+                  <p className="font-['Newsreader'] text-3xl font-light text-[#00523C] sm:text-4xl">100Cr+</p>
                   <p className="mt-1 font-['Inter'] text-[12px] text-[#888888] sm:text-[13px]">Total Sales</p>
                 </div>
                 <div className="w-px self-stretch bg-[#ECECEC]" />

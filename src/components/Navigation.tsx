@@ -4,11 +4,13 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
+import Image from 'next/image'
 
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
+  { label: 'Services', href: '/service' },
   { label: 'Contact Us', href: '/contact' },
 ]
 
@@ -85,11 +87,20 @@ export default function Navigation() {
         <div className="mx-auto flex h-full max-w-[1400px] items-center justify-between px-5 sm:px-6">
 
           {/* Logo */}
-          <Link
-            href="/"
-            className="font-['Inter'] text-[12px] font-semibold uppercase tracking-[0.08em] text-[#00523C] sm:text-[13px]"
-          >
-            Realestate Srinagar
+          <Link href="/" className="flex items-center gap-1.5">
+            <Image
+              src="/assets/LogoHouse1.png"
+              alt="Realestate Srinagar"
+              width={28}
+              height={28}
+              className="h-6 w-6 object-contain mb-1 sm:h-7 sm:w-7 sm:mb-1"
+              priority
+            />
+            {/* Short name on mobile, full name on sm+ */}
+            <span className="font-['Inter'] text-[12px] font-semibold uppercase tracking-[0.08em] text-[#00523C] sm:text-[13px]">
+              {/* <span className="sm:hidden">Realestate Srinagar</span> */}
+              <span className="sm:inline">Realestate Srinagar</span>
+            </span>
           </Link>
 
           {/* Desktop nav links */}
@@ -98,11 +109,10 @@ export default function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] transition-colors duration-200 ${
-                  isActive(link.href)
-                    ? 'text-[#00523C]'
-                    : 'text-[#212121] hover:text-[#00523C]'
-                }`}
+                className={`font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] transition-colors duration-200 ${isActive(link.href)
+                  ? 'text-[#00523C]'
+                  : 'text-[#212121] hover:text-[#00523C]'
+                  }`}
               >
                 {link.label}
               </Link>
@@ -155,11 +165,10 @@ export default function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`border-b py-5 font-['Newsreader'] text-[38px] font-light leading-none transition-colors ${
-                  isActive(link.href)
-                    ? 'border-[#00523C]/20 text-[#00523C]'
-                    : 'border-[#ECECEC] text-[#212121] hover:text-[#00523C]'
-                }`}
+                className={`border-b py-5 font-['Newsreader'] text-[38px] font-light leading-none transition-colors ${isActive(link.href)
+                  ? 'border-[#00523C]/20 text-[#00523C]'
+                  : 'border-[#ECECEC] text-[#212121] hover:text-[#00523C]'
+                  }`}
                 onClick={() => setMenuOpen(false)}
                 style={{ transitionDelay: menuOpen ? `${i * 40}ms` : '0ms' }}
               >

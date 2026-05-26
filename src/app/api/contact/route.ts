@@ -12,17 +12,14 @@ type ContactPayload = {
   message: string
 }
 
-// ─── Transporter ──────────────────────────────────────────────────────────────
-// Works with Gmail (with App Password), Outlook, or any SMTP.
-// See .env.local setup instructions in the README block below.
 function createTransporter() {
   return nodemailer.createTransport({
-    host: process.env.SMTP_HOST,       // e.g. smtp.gmail.com
+    host: process.env.SMTP_HOST,      
     port: Number(process.env.SMTP_PORT) || 465,
     secure: process.env.SMTP_SECURE !== 'false', // true for 465, false for 587
     auth: {
-      user: process.env.SMTP_USER,     // your sending email
-      pass: process.env.SMTP_PASS,     // App Password (NOT your login password)
+      user: process.env.SMTP_USER,     
+      pass: process.env.SMTP_PASS,   
     },
   })
 }

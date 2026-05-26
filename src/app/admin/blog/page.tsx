@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Post = {
   _id: string
@@ -61,9 +62,6 @@ export default function AdminBlogPage() {
   const [deleting, setDeleting] = useState(false)
   const [togglingId, setTogglingId] = useState<string | null>(null)
 
-  // FIX 2: wrap in useCallback so useEffect can list it as a dependency
-  // safely — the function reference is stable and setState calls happen
-  // inside an async .then() / await, never in the synchronous effect body
   const loadPosts = useCallback(async (s: string) => {
     setLoading(true)
     const res = await fetch('/api/blog?admin=true', {
@@ -137,9 +135,20 @@ export default function AdminBlogPage() {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-[#F8F8F8] px-5">
         <div className="w-full max-w-[380px] rounded bg-white p-8 shadow-sm">
-          <p className="font-['Newsreader'] text-[13px] uppercase tracking-[0.08em] text-[#00523C]">
-            Realestate Srinagar
-          </p>
+          <Link href="/" className="flex items-center gap-1.5">
+            <Image
+              src="/assets/LogoHouse1.png"
+              alt="Realestate Srinagar"
+              width={28}
+              height={28}
+              className="h-6 w-6 object-contain mb-1 sm:h-7 sm:w-7 sm:mb-1"
+              priority
+            />
+            {/* Short name on mobile, full name on sm+ */}
+            <span className="font-['Inter'] text-[12px] font-semibold uppercase tracking-[0.08em] text-[#00523C] sm:text-[13px]">
+              <span className="sm:inline">Realestate Srinagar</span>
+            </span>
+          </Link>
           <h1 className="mt-2 font-['Newsreader'] text-[32px] font-light text-[#212121]">Admin Login</h1>
           <div className="mt-6">
             <label className="block font-['Inter'] text-[12px] uppercase tracking-[0.05em] text-[#888888]">
@@ -250,9 +259,8 @@ export default function AdminBlogPage() {
                           onClick={() => togglePublish(post)}
                           disabled={togglingId === post._id}
                           title={post.published ? 'Click to unpublish' : 'Click to publish'}
-                          className={`rounded-full px-3 py-1 font-['Inter'] text-[11px] font-medium uppercase tracking-[0.05em] transition-opacity disabled:opacity-50 ${
-                            post.published ? 'bg-[#E8F5E9] text-[#00523C]' : 'bg-[#FFF3E0] text-[#7C4A00]'
-                          }`}
+                          className={`rounded-full px-3 py-1 font-['Inter'] text-[11px] font-medium uppercase tracking-[0.05em] transition-opacity disabled:opacity-50 ${post.published ? 'bg-[#E8F5E9] text-[#00523C]' : 'bg-[#FFF3E0] text-[#7C4A00]'
+                            }`}
                         >
                           {togglingId === post._id ? '…' : post.published ? '✓ Published' : 'Draft'}
                         </button>
@@ -295,9 +303,8 @@ export default function AdminBlogPage() {
                     <button
                       onClick={() => togglePublish(post)}
                       disabled={togglingId === post._id}
-                      className={`shrink-0 rounded-full px-2.5 py-1 font-['Inter'] text-[10px] font-medium uppercase tracking-[0.05em] transition-opacity disabled:opacity-50 ${
-                        post.published ? 'bg-[#E8F5E9] text-[#00523C]' : 'bg-[#FFF3E0] text-[#7C4A00]'
-                      }`}
+                      className={`shrink-0 rounded-full px-2.5 py-1 font-['Inter'] text-[10px] font-medium uppercase tracking-[0.05em] transition-opacity disabled:opacity-50 ${post.published ? 'bg-[#E8F5E9] text-[#00523C]' : 'bg-[#FFF3E0] text-[#7C4A00]'
+                        }`}
                     >
                       {togglingId === post._id ? '…' : post.published ? '✓ Published' : 'Draft'}
                     </button>

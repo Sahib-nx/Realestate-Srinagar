@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const footerColumns = [
   {
@@ -48,11 +49,20 @@ export default function Footer() {
       <div className="h-1 w-full bg-[#00523C]" />
 
       <div className="mx-auto max-w-[1400px] px-6 py-20 pb-10">
-        <Link
-          href="/"
-          className="font-['Inter'] text-[13px] font-semibold uppercase tracking-[0.08em] text-[#00523C]"
-        >
-          Realestate Srinagar
+        <Link href="/" className="flex items-center gap-1.5">
+          <Image
+            src="/assets/LogoHouse1.png"
+            alt="Realestate Srinagar"
+            width={28}
+            height={28}
+            className="h-6 w-6 object-contain mb-1 sm:h-7 sm:w-7 sm:mb-1"
+            priority
+          />
+          {/* Short name on mobile, full name on sm+ */}
+          <span className="font-['Inter'] text-[12px] font-semibold uppercase tracking-[0.08em] text-[#00523C] sm:text-[13px]">
+            {/* <span className="sm:hidden">Realestate Srinagar</span> */}
+            <span className="sm:inline">Realestate Srinagar</span>
+          </span>
         </Link>
 
         <h2 className="mt-6 font-['Newsreader'] text-5xl font-light text-[#212121]">

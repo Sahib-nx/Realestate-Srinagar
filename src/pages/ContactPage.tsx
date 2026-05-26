@@ -249,7 +249,7 @@ export default function ContactPage() {
                   }}
                 />
                 <div>
-                  <p className="font-['Inter'] text-[14px] font-medium text-[#212121] sm:text-[15px]">Sheheyar Khan</p>
+                  <p className="font-['Inter'] text-[14px] font-medium text-[#212121] sm:text-[15px]">Mr. Khan</p>
                   <p className="mt-0.5 font-['Inter'] text-[12px] text-[#888888] sm:text-[13px]">
                     Senior Advisor · Luxury Division
                   </p>

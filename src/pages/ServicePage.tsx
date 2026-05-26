@@ -303,9 +303,9 @@ export default function ServicesPage() {
           <div className="mx-auto max-w-[1400px] px-5 sm:px-6">
             <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-12">
               {[
-                { value: '14+', label: 'Years of expertise' },
+                { value: '9+', label: 'Years of expertise' },
                 { value: '7', label: 'Specialized services' },
-                { value: '$500M+', label: 'Transactions closed' },
+                { value: '100Cr+', label: 'Transactions closed' },
                 { value: '5', label: 'Markets served' },
               ].map((stat) => (
                 <div key={stat.label} className="text-center sm:text-left">

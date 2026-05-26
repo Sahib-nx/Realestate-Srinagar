@@ -8,20 +8,18 @@ import { gsap } from 'gsap'
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-    { label: 'Blog', href: '/blog' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Contact Us', href: '/contact' },
 ]
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [searchOpen, setSearchOpen] = useState(false)
 
   const navRef = useRef<HTMLElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
-  const searchRef = useRef<HTMLDivElement>(null)
 
-  const pathname = usePathname() // string | null
+  const pathname = usePathname()
   const router = useRouter()
 
   // Lock body scroll when mobile menu is open
@@ -49,39 +47,21 @@ export default function Navigation() {
     }
   }, [menuOpen])
 
-  // Search bar expand animation
-  useEffect(() => {
-    if (!searchRef.current) return
-    if (searchOpen) {
-      gsap.to(searchRef.current, { height: 80, opacity: 1, duration: 0.3, ease: 'power2.out' })
-    } else {
-      gsap.to(searchRef.current, { height: 0, opacity: 0, duration: 0.25, ease: 'power2.in' })
-    }
-  }, [searchOpen])
-
   // Escape key
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setSearchOpen(false)
-        setMenuOpen(false)
-      }
+      if (e.key === 'Escape') setMenuOpen(false)
     }
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
   }, [])
 
+  // Close menu on route change
   const prevPathnameRef = useRef(pathname)
   useEffect(() => {
     if (prevPathnameRef.current === pathname) return
     prevPathnameRef.current = pathname
-    // Only runs when pathname genuinely changed — no setState here,
-    // we close via the GSAP animation triggers by toggling state outside effect
-    const close = () => {
-      setMenuOpen(false)
-      setSearchOpen(false)
-    }
-    close()
+    setMenuOpen(false)
   }, [pathname])
 
   const isActive = (href: string) => {
@@ -132,15 +112,6 @@ export default function Navigation() {
           {/* Right controls */}
           <div className="flex items-center gap-2 sm:gap-4">
 
-            {/* Search icon */}
-            <button
-              onClick={() => setSearchOpen(!searchOpen)}
-              className="hidden text-[#212121] transition-colors hover:text-[#00523C] md:block"
-              aria-label="Search"
-            >
-              <SearchIcon />
-            </button>
-
             {/* CTA */}
             <button
               className="hidden rounded-full border border-[#00523C] px-5 py-2 font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] text-[#00523C] transition-all duration-200 hover:bg-[#00523C] hover:text-white md:block"
@@ -168,29 +139,6 @@ export default function Navigation() {
           </div>
         </div>
       </nav>
-
-      {/* ── Search Bar ───────────────────────────────────────────────── */}
-      <div
-        ref={searchRef}
-        className="fixed left-0 right-0 z-[499] hidden overflow-hidden bg-white md:block"
-        style={{ top: 56, height: 0, opacity: 0 }}
-      >
-        <div className="mx-auto flex max-w-[1400px] items-center gap-4 border-b border-[#ECECEC] px-6 py-5">
-          <SearchIcon color="#888888" />
-          <input
-            type="text"
-            placeholder="Search neighborhoods, properties, guides…"
-            autoFocus={searchOpen}
-            className="flex-1 bg-transparent font-['Inter'] text-base text-[#212121] outline-none placeholder:text-[#BBBBBB]"
-          />
-          <button
-            onClick={() => setSearchOpen(false)}
-            className="font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] text-[#888888] transition-colors hover:text-[#212121]"
-          >
-            Close
-          </button>
-        </div>
-      </div>
 
       {/* ── Mobile Menu ──────────────────────────────────────────────── */}
       <div
@@ -220,23 +168,6 @@ export default function Navigation() {
             ))}
           </nav>
 
-          {/* Secondary actions */}
-          <div className="mt-8 flex items-center gap-6 border-b border-[#ECECEC] pb-8">
-            <button
-              onClick={() => {
-                setMenuOpen(false)
-                setTimeout(() => setSearchOpen(true), 350)
-              }}
-              className="font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] text-[#888888] transition-colors hover:text-[#212121]"
-            >
-              Search
-            </button>
-            <div className="h-3 w-px bg-[#ECECEC]" />
-            <button className="font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] text-[#888888] transition-colors hover:text-[#212121]">
-              Sign In
-            </button>
-          </div>
-
           {/* CTA */}
           <div className="mt-8">
             <button
@@ -263,44 +194,6 @@ export default function Navigation() {
           </div>
         </div>
       </div>
-
-      {/* ── Mobile Search ────────────────────────────────────────────── */}
-      <div
-        className="fixed left-0 right-0 z-[501] overflow-hidden bg-white md:hidden"
-        style={{
-          top: 56,
-          height: searchOpen ? 'auto' : 0,
-          opacity: searchOpen ? 1 : 0,
-          transition: 'opacity 0.25s ease, height 0.25s ease',
-        }}
-      >
-        <div className="flex items-center gap-3 border-b border-[#ECECEC] px-5 py-4">
-          <SearchIcon color="#888888" />
-          <input
-            type="text"
-            placeholder="Search…"
-            className="flex-1 bg-transparent font-['Inter'] text-base text-[#212121] outline-none placeholder:text-[#BBBBBB]"
-          />
-          <button
-            onClick={() => setSearchOpen(false)}
-            className="p-1 text-[#888888]"
-            aria-label="Close search"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      </div>
     </>
-  )
-}
-
-function SearchIcon({ color = 'currentColor' }: { color?: string }) {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.35-4.35" />
-    </svg>
   )
 }

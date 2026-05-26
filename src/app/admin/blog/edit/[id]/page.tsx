@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
+import ImageUpload from '@/components/ImageUpload'
 
 const CATEGORIES = ['Achievement', 'Company Update', 'Market Insight', 'Advice']
 
@@ -40,15 +41,17 @@ export default function EditPostPage() {
     })
   }, [])
 
-
   useEffect(() => {
     if (!verified) return
     const secret = sessionStorage.getItem('adminSecret') || ''
     fetch(`/api/blog/${id}`, {
       headers: { 'x-admin-secret': secret },
     })
-      .then((r) => r.json())
-      .then((data) => {
+      .then(async (r) => {
+        // Safe parse — avoids "Unexpected end of JSON" on error responses
+        const text = await r.text()
+        const data = text ? (() => { try { return JSON.parse(text) } catch { return {} } })() : {}
+        if (!r.ok) { setError(data.error || `Failed to load post (${r.status})`); setLoading(false); return }
         setForm({
           title: data.title || '',
           excerpt: data.excerpt || '',
@@ -60,6 +63,7 @@ export default function EditPostPage() {
         })
         setLoading(false)
       })
+      .catch(() => { setError('Network error — could not load post.'); setLoading(false) })
   }, [id, verified])
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
@@ -70,12 +74,8 @@ export default function EditPostPage() {
     }))
   }
 
-
   function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   async function handleSave(publish?: boolean) {
@@ -91,10 +91,7 @@ export default function EditPostPage() {
     setError('')
     setSuccess(false)
 
-    const body =
-      publish !== undefined
-        ? { ...form, published: publish }
-        : form
+    const body = publish !== undefined ? { ...form, published: publish } : form
 
     try {
       const res = await fetch(`/api/blog/${id}`, {
@@ -106,28 +103,23 @@ export default function EditPostPage() {
         body: JSON.stringify(body),
       })
 
-      const data = await res.json()
+      // Safe parse — avoids crash if server returns a non-JSON error body
+      const text = await res.text()
+      const data = text ? (() => { try { return JSON.parse(text) } catch { return {} } })() : {}
 
       if (res.ok) {
         scrollToTop()
-
         setSuccess(true)
-
+        // Use server-confirmed published value instead of what we assumed
         if (publish !== undefined) {
-          setForm((prev) => ({
-            ...prev,
-            published: publish,
-          }))
+          setForm((prev) => ({ ...prev, published: data.published ?? publish }))
         }
-
-        setTimeout(() => {
-          router.push('/admin/blog')
-        }, 1000)
+        setTimeout(() => router.push('/admin/blog'), 1000)
       } else {
         scrollToTop()
         setError(data.error || 'Something went wrong.')
       }
-    } catch (err) {
+    } catch {
       scrollToTop()
       setError('Something went wrong.')
     } finally {
@@ -152,7 +144,7 @@ export default function EditPostPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F8F8]">
+    <div className="min-h-screen bg-[#F8F8F8] py-14">
       {/* Header */}
       <div className="border-b border-[#ECECEC] bg-white px-5 py-4 sm:px-6">
         <div className="mx-auto flex max-w-[900px] items-center justify-between">
@@ -210,6 +202,11 @@ export default function EditPostPage() {
             <span className={`rounded-full px-3 py-1 font-['Inter'] text-[11px] font-medium uppercase tracking-[0.05em] ${form.published ? 'bg-[#E8F5E9] text-[#00523C]' : 'bg-[#FFF3E0] text-[#7C4A00]'}`}>
               {form.published ? 'Published' : 'Draft'}
             </span>
+            {!form.published && (
+              <span className="font-['Inter'] text-[11px] text-[#888888]">
+                — click Publish above to make this post live
+              </span>
+            )}
           </div>
 
           {/* Title */}
@@ -277,21 +274,16 @@ export default function EditPostPage() {
             </div>
           </div>
 
-          {/* Cover Image */}
+          {/* Cover Image — Cloudinary uploader replaces the plain URL input */}
           <div>
-            <label className="block font-['Inter'] text-[11px] font-medium uppercase tracking-[0.05em] text-[#888888]">
-              Cover Image URL <span className="font-normal normal-case">(optional)</span>
+            <label className="mb-2 block font-['Inter'] text-[11px] font-medium uppercase tracking-[0.05em] text-[#888888]">
+              Cover Image <span className="font-normal normal-case">(optional)</span>
             </label>
-            <input
-              name="coverImage"
-              value={form.coverImage}
-              onChange={handleChange}
-              placeholder="https://... or /assets/photo.jpg"
-              className="mt-2 w-full rounded border border-[#ECECEC] bg-white px-3 py-2.5 font-['Inter'] text-[14px] text-[#212121] outline-none focus:border-[#00523C]"
+            <ImageUpload
+              currentUrl={form.coverImage}
+              onUpload={(url) => setForm((prev) => ({ ...prev, coverImage: url }))}
+              onClear={() => setForm((prev) => ({ ...prev, coverImage: '' }))}
             />
-            {form.coverImage && (
-              <img src={form.coverImage} alt="preview" className="mt-3 h-32 w-full rounded object-cover" />
-            )}
           </div>
         </div>
 

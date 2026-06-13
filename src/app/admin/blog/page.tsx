@@ -137,21 +137,39 @@ export default function AdminBlogPage() {
         <div className="w-full max-w-[380px] rounded bg-white p-8 shadow-sm">
           <Link href="/" className="flex items-center gap-1.5">
             <Image
-              src="/assets/LogoHouse1.png"
+              src="/assets/LogoHouse.png"
               alt="Realestate Srinagar"
               width={28}
               height={28}
-              className="h-6 w-6 object-contain mb-1 sm:h-7 sm:w-7 sm:mb-1"
+              className="h-6 w-6 object-contain mb-1 sm:h-7 sm:w-7 sm:mb-1 "
               priority
             />
-            {/* Short name on mobile, full name on sm+ */}
             <span className="font-['Inter'] text-[12px] font-semibold uppercase tracking-[0.08em] text-[#00523C] sm:text-[13px]">
               <span className="sm:inline">Realestate Srinagar</span>
             </span>
           </Link>
-          <h1 className="mt-2 font-['Newsreader'] text-[32px] font-light text-[#212121]">Admin Login</h1>
-          <div className="mt-6">
-            <label className="block font-['Inter'] text-[12px] uppercase tracking-[0.05em] text-[#888888]">
+
+          <div className="mt-2 flex items-center gap-2">
+            <Image
+              src="/assets/manager.png"
+              alt="Realestate Srinagar"
+              width={28}
+              height={28}
+              className="h-6.5 w-6.5 mb-2 object-contain flex-shrink-0"
+              priority
+            />
+            <h1 className="font-['Newsreader'] text-[32px] font-light text-[#212121]">Admin Login</h1>
+          </div>
+
+          <div className="mt-4">
+            <label className="flex items-center gap-1.5 font-['Inter'] text-[12px] uppercase tracking-[0.05em] text-[#888888]">
+              <Image
+                src="/assets/key.png"
+                alt="Key"
+                width={18}
+                height={18}
+                className="object-contain opacity-60"
+              />
               Admin Secret
             </label>
             <input

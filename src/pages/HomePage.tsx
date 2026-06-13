@@ -96,7 +96,7 @@ export default function HomePage() {
               className="max-w-[90vw] font-['Newsreader'] text-[36px] font-light leading-[1.1] text-white sm:max-w-[540px] sm:text-5xl md:max-w-[600px] md:text-6xl"
               style={{ textShadow: '0 2px 20px rgba(0,0,0,0.3)' }}
             >
-              Where Srinagar Living Begins
+              Local Expertise, Global Reach
             </h1>
 
             {/* Subtitle: hidden on very small screens to reduce clutter */}
@@ -104,7 +104,7 @@ export default function HomePage() {
               className="mt-3 hidden max-w-[480px] font-['Inter'] text-base text-white/90 sm:mt-4 sm:block sm:text-lg"
               style={{ textShadow: '0 1px 10px rgba(0,0,0,0.2)' }}
             >
-              Curated luxury homes, exceptional service, unmatched expertise.
+              Curated luxury homes, strategic investments, and unmatched real estate expertise across Srinagar, Jammu, Delhi, Dholera, Dubai, and beyond.
             </p>
 
             {/* Show a short version on tiny screens */}
@@ -112,7 +112,8 @@ export default function HomePage() {
               className="mt-3 font-['Inter'] text-sm text-white/80 sm:hidden"
               style={{ textShadow: '0 1px 10px rgba(0,0,0,0.2)' }}
             >
-              Curated luxury homes &amp; unmatched expertise.
+              Curated luxury homes, strategic investments, and unmatched real estate expertise across Srinagar, Jammu, Delhi, Dholera, Dubai, and beyond.
+
             </p>
 
             <a

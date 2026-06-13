@@ -8,7 +8,7 @@ import Footer from '@/components/Footer'
 import ScrollIndicator from '@/components/ScrollIndicator'
 import CustomCursor from '@/components/CustomCursor'
 import NoiseOverlay from '@/components/NoiseOverlay'
-import ScrollToTopProvider from '@/components/providers/ScrollToTopProvider'  // ← add this
+import ScrollToTopProvider from '@/components/providers/ScrollToTopProvider'
 
 const inter = Inter({
   subsets: ['latin'],

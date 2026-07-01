@@ -388,7 +388,7 @@ export default function AboutContent() {
               <PhoneIcon />
               <p className="mt-2 font-['Newsreader'] text-lg font-light text-white sm:text-xl">
                 <a href="tel:+919419000000" className="hover:opacity-80">
-                  +91 94190 00000
+                  +91 7889902696, +91 7006064638
                 </a>
               </p>
               <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">Mon–Sat, 9am–7pm IST</p>
@@ -403,7 +403,7 @@ export default function AboutContent() {
               <MailIcon />
               <p className="mt-2 font-['Newsreader'] text-lg font-light text-white sm:text-xl">
                 <a href="mailto:hello@realestate-srinagar.com" className="hover:opacity-80">
-                  hello@realestate-srinagar.com
+                  realestatessrinagar@gmail.com
                 </a>
               </p>
               <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">We respond within 24 hours</p>
@@ -414,9 +414,9 @@ export default function AboutContent() {
             <div className="text-center">
               <LocationIcon />
               <p className="mt-2 font-['Newsreader'] text-lg font-light text-white sm:text-xl">
-                Residency Road, Srinagar
+                Al Sitaar Complex, Hyderpora
               </p>
-              <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">J&amp;K 190001, India</p>
+              <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">J&amp;K 190009, Srinagar</p>
             </div>
           </address>
 

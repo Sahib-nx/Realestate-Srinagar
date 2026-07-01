@@ -39,10 +39,10 @@ const values = [
 ]
 
 const team: TeamMember[] = [
-  { name: 'Sarah Chen', title: 'Principal Broker', experience: '18 years in Srinagar real estate', image: '/assets/property-stratford.jpg' },
-  { name: 'Marcus Williams', title: 'Luxury Specialist', experience: '14 years, $200M+ in sales', image: '/assets/property-westlake.jpg' },
-  { name: 'Elena Rodriguez', title: 'Buyer Advocate', experience: '10 years, former attorney', image: '/assets/property-hyde.jpg' },
-  { name: 'David Park', title: 'Market Analyst', experience: '8 years, data-driven strategist', image: '/assets/property-barton.jpg' },
+  { name: 'Shaheryar Khan', title: 'Founder and Chairman', experience: '18 years in Srinagar real estate', image: '/assets/SharuTeam.jpeg' },
+  { name: 'Umar Farooq', title: 'Managing Director(MD)', experience: '14 years, $200M+ in sales', image: '/assets/UmarTeam.jpeg' },
+  { name: 'Muzammil', title: 'Cheif Revenue Officer(CRO)', experience: '10 years', image: '/assets/MuzamilTeam.jpeg' },
+  { name: 'Huzaif', title: 'Cheif Operating Officer(COO)', experience: '8 years', image: '/assets/HuzaifTeam.jpeg' },
 ]
 
 const testimonials: Testimonial[] = [
@@ -349,10 +349,10 @@ export default function AboutPage() {
           {/* Summary numbers */}
           <div className="mt-10 text-center sm:mt-12">
             <p className="font-['Newsreader'] text-[36px] font-light text-[#00523C] sm:text-5xl">
-              181 Transactions
+              500+ Transactions
             </p>
             <p className="mt-1 font-['Newsreader'] text-[24px] font-light text-[#212121] sm:mt-2 sm:text-[32px]">
-              $513,000,000 in Sales
+              100Cr+ in Sales
             </p>
           </div>
         </div>

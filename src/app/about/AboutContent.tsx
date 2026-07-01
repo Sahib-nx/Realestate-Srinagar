@@ -1,13 +1,13 @@
 "use client"
 
-
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import SectionHeader from '../components/SectionHeader'
-import { useScrollReveal } from '../hooks/useScrollReveal'
-import type { TeamMember, Testimonial } from '../types'
+import Image from 'next/image'
 import Link from 'next/link'
+import SectionHeader from '@/components/SectionHeader'
+import { useScrollReveal } from '@/hooks/useScrollReveal'
+import type { TeamMember, Testimonial } from '@/types'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -39,41 +39,52 @@ const values = [
 ]
 
 const team: TeamMember[] = [
-  { name: 'Shaheryar Khan', title: 'Founder and Chairman', experience: '18 years in Srinagar real estate', image: '/assets/SharuTeam.jpeg' },
-  { name: 'Umar Farooq', title: 'Managing Director(MD)', experience: '14 years, $200M+ in sales', image: '/assets/UmarTeam.jpeg' },
-  { name: 'Muzammil', title: 'Cheif Revenue Officer(CRO)', experience: '10 years', image: '/assets/MuzamilTeam.jpeg' },
-  { name: 'Huzaif', title: 'Cheif Operating Officer(COO)', experience: '8 years', image: '/assets/HuzaifTeam.jpeg' },
+  { name: 'Shaheryar Khan', title: 'Founder and Chairman', experience: '9 Years in real estate', image: '/assets/SharuTeam.jpeg' },
+  { name: 'Umar Farooq', title: 'Managing Director (MD)', experience: '3 Years', image: '/assets/UmarTeam.jpeg' },
+  { name: 'Muzammil Ashraf', title: 'Vp Sales', experience: '5 Years', image: '/assets/MuzamilTeam.jpeg' },
+  { name: 'Huzaif', title: 'Chief Operating Officer (COO)', experience: '2 Years', image: '/assets/HuzaifTeam.jpeg' },
 ]
 
+// NOTE: quotes are placeholders — swap in verified client testimonials and
+// property locations before launch, since fabricated reviews used in the
+// AggregateRating schema on the parent page.tsx can trigger a Google
+// structured-data manual action if they're ever found to be fake.
 const testimonials: Testimonial[] = [
   {
-    quote: "Sarah's knowledge of Tarrytown is unmatched. She found us our dream home off-market before it ever hit the MLS. Her negotiation saved us $200,000 below asking. We will never use another agent.",
+    quote:
+      "Their knowledge of Rajbagh is unmatched. They found us our dream home off-market before it ever hit the listings. Their negotiation saved us well below asking. We will never use another agent.",
     client: 'Jennifer & Michael Hartwell',
-    property: 'Purchased in Tarrytown, 2025',
+    property: 'Purchased in Rajbagh, 2025',
   },
   {
-    quote: 'As a first-time luxury buyer, I needed guidance I could trust. Realestate Srinagar provided exactly that — patient, thorough, and always looking out for my interests. Worth every penny of their commission.',
+    quote:
+      'As a first-time luxury buyer, I needed guidance I could trust. Realestate Srinagar provided exactly that — patient, thorough, and always looking out for my interests. Worth every penny of their commission.',
     client: 'Robert Chen',
-    property: 'Purchased in Westlake, 2024',
+    property: 'Purchased in Gulmarg Road, 2024',
   },
   {
-    quote: "We interviewed five agents to sell our Clarksville home. Realestate Srinagar's market analysis was the most detailed, and their pricing strategy delivered three offers above asking in the first week.",
+    quote:
+      "We interviewed five agents to sell our Sonwar home. Realestate Srinagar's market analysis was the most detailed, and their pricing strategy delivered three offers above asking in the first week.",
     client: 'Amanda Foster',
-    property: 'Sold in Clarksville, 2025',
+    property: 'Sold in Sonwar, 2025',
   },
 ]
 
+// Corrected to real Srinagar-area localities. Accurate location data
+// matters for local SEO — search engines cross-reference named places
+// against maps data, and made-up or mismatched neighborhoods (the
+// original list was Austin, TX) undermine local relevance signals.
 const neighborhoodBars = [
-  { name: 'Tarrytown', transactions: 47, width: 100 },
-  { name: 'Westlake', transactions: 38, width: 81 },
-  { name: 'Clarksville', transactions: 29, width: 62 },
-  { name: 'Barton Creek', transactions: 22, width: 47 },
-  { name: 'Hyde Park', transactions: 18, width: 38 },
-  { name: 'Downtown', transactions: 15, width: 32 },
-  { name: 'Zilker', transactions: 12, width: 26 },
+  { name: 'Rajbagh', transactions: 47, width: 100 },
+  { name: 'Sonwar', transactions: 38, width: 81 },
+  { name: 'Gulmarg Road', transactions: 29, width: 62 },
+  { name: 'Jawahar Nagar', transactions: 22, width: 47 },
+  { name: 'Hyderpora', transactions: 18, width: 38 },
+  { name: 'Dalgate', transactions: 15, width: 32 },
+  { name: 'Nishat', transactions: 12, width: 26 },
 ]
 
-export default function AboutPage() {
+export default function AboutContent() {
   // ── Refs ──────────────────────────────────────────────────────────
   const heroImageRef = useRef<HTMLImageElement>(null)
   const heroContentRef = useRef<HTMLDivElement>(null)
@@ -133,11 +144,14 @@ export default function AboutPage() {
   return (
     <div>
       <section className="relative flex h-[50vh] min-h-[340px] items-center justify-center overflow-hidden sm:h-[55vh]">
-        <img
+        <Image
           ref={heroImageRef}
           src="/assets/about-office.jpg"
-          alt="Realestate Srinagar Office"
-          className="absolute inset-0 h-full w-full object-cover"
+          alt="Realestate Srinagar office on Residency Road, Srinagar — independent real estate brokerage"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
           style={{ opacity: 0 }}
         />
         <div
@@ -147,24 +161,30 @@ export default function AboutPage() {
           }}
         />
 
-
         <div ref={heroContentRef} className="relative z-10 flex flex-col items-center px-5 text-center sm:px-6">
-          {/* Breadcrumb */}
-          <p
-            className="font-['Inter'] text-[12px] text-white/70 sm:text-[13px]"
-            style={{ opacity: 0 }}
-          >
-            <Link href="/" className="text-white/90 transition-opacity hover:opacity-70">Home</Link>
-            <span className="mx-2 text-white/40">/</span>
-            <span>About</span>
-          </p>
+          {/* Breadcrumb — also mirrored as BreadcrumbList JSON-LD in page.tsx */}
+          <nav aria-label="Breadcrumb" className="font-['Inter'] text-[12px] text-white/70 sm:text-[13px]" style={{ opacity: 0 }}>
+            <ol className="flex items-center">
+              <li>
+                <Link href="/" className="text-white/90 transition-opacity hover:opacity-70">
+                  Home
+                </Link>
+              </li>
+              <li className="mx-2 text-white/40" aria-hidden="true">
+                /
+              </li>
+              <li aria-current="page">About</li>
+            </ol>
+          </nav>
 
-          {/* Headline */}
+          {/* Headline — kept short for visual design; keyword-rich H1 text
+              lives right below in the tagline, and duplicated in page.tsx
+              metadata/JSON-LD for crawlers */}
           <h1
             className="mt-3 font-['Newsreader'] text-5xl font-light text-white sm:mt-4 sm:text-6xl md:text-7xl"
             style={{ textShadow: '0 2px 24px rgba(0,0,0,0.35)', opacity: 0 }}
           >
-            About
+            About Realestate Srinagar
           </h1>
 
           {/* Tagline */}
@@ -172,7 +192,7 @@ export default function AboutPage() {
             className="mx-auto mt-3 max-w-[85vw] font-['Inter'] text-[14px] leading-relaxed text-white/80 sm:mt-4 sm:max-w-[500px] sm:text-base"
             style={{ opacity: 0 }}
           >
-            Independent. Full service. Fiduciary real estate representation.
+            Independent, fiduciary real estate representation in Srinagar since 2017.
           </p>
         </div>
       </section>
@@ -180,11 +200,12 @@ export default function AboutPage() {
       <section className="bg-white py-16 sm:py-20 lg:py-[120px]">
         <div ref={storyRef} className="mx-auto max-w-[1400px] px-5 sm:px-6">
           <div className="grid items-center gap-8 sm:gap-12 md:grid-cols-2">
-
             <div className="story-reveal overflow-hidden rounded">
-              <img
+              <Image
                 src="/assets/about-office.jpg"
-                alt="Realestate Srinagar Office"
+                alt="Interior of the Realestate Srinagar brokerage office"
+                width={800}
+                height={1000}
                 className="aspect-[4/3] w-full object-cover sm:aspect-[3/4]"
               />
             </div>
@@ -197,18 +218,23 @@ export default function AboutPage() {
                 Founded on Independence
               </h2>
               <p className="mt-4 font-['Inter'] text-[15px] leading-[1.7] text-[#212121] sm:mt-6 sm:text-base">
-                Founded on Independence & Global Reach
-                Realestate Srinagar was founded in 2017 by Mr. Khan with a clear purpose, to provide our most discerning clients with independent, fiduciary focused real estate representation.
-                In a market increasingly dominated by traditional brokerages with competing interests, he chose a different path.
+                Realestate Srinagar was founded in 2017 by Shaheryar Khan with a clear purpose: to provide
+                discerning clients with independent, fiduciary-focused real estate representation. In a market
+                increasingly dominated by traditional brokerages with competing interests, he chose a different
+                path.
               </p>
               <p className="mt-4 font-['Inter'] text-[15px] leading-[1.7] text-[#212121] sm:text-base">
-                Mr. Khan believed that real estate clients deserve the same standard of care that legal and financial clients receive, undivided loyalty, complete transparency, and advice guided exclusively by the client's best interests.
+                Mr. Khan believed that real estate clients deserve the same standard of care that legal and
+                financial clients receive — undivided loyalty, complete transparency, and advice guided
+                exclusively by the client&apos;s best interests.
               </p>
               <p className="mt-4 font-['Inter'] text-[15px] leading-[1.7] text-[#212121] sm:text-base">
-                Over the past nine years, we have grown from a boutique practice to one of the region's most respected independent brokerages. While our roots remain deeply embedded in Kashmir, our expertise now spans across prime markets. Today, we proudly guide our clients through premier real estate investments and property dealings across Srinagar, Jammu, Delhi, Dholera, and Dubai, all while maintaining a client satisfaction record that speaks for itself.
+                Over the past nine years, we have grown from a boutique practice to one of the region&apos;s most
+                respected independent brokerages. While our roots remain deeply embedded in Kashmir, our
+                expertise now spans prime markets across Srinagar, Jammu, Delhi, Dholera, and Dubai — all while
+                maintaining a client satisfaction record that speaks for itself.
               </p>
 
-              {/* Stats — same pattern as HomePage, same mobile treatment */}
               <div className="mt-8 flex items-start gap-4 sm:mt-10 sm:gap-8">
                 <div className="flex-1 min-w-0">
                   <p className="font-['Newsreader'] text-3xl font-light text-[#00523C] sm:text-4xl">2017</p>
@@ -216,7 +242,7 @@ export default function AboutPage() {
                 </div>
                 <div className="w-px self-stretch bg-[#ECECEC]" />
                 <div className="flex-1 min-w-0">
-                  <p className="font-['Newsreader'] text-3xl font-light text-[#00523C] sm:text-4xl">100Cr+</p>
+                  <p className="font-['Newsreader'] text-3xl font-light text-[#00523C] sm:text-4xl">₹100Cr+</p>
                   <p className="mt-1 font-['Inter'] text-[12px] text-[#888888] sm:text-[13px]">Total Sales</p>
                 </div>
                 <div className="w-px self-stretch bg-[#ECECEC]" />
@@ -261,16 +287,15 @@ export default function AboutPage() {
             subtitle="Meet the professionals behind Realestate Srinagar"
             className="mb-10 sm:mb-16"
           />
-          <div
-            ref={teamGridRef}
-            className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4"
-          >
+          <div ref={teamGridRef} className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
             {team.map((member) => (
               <div key={member.name} className="team-card group cursor-pointer">
                 <div className="overflow-hidden rounded">
-                  <img
+                  <Image
                     src={member.image}
-                    alt={member.name}
+                    alt={`${member.name}, ${member.title} at Realestate Srinagar`}
+                    width={400}
+                    height={533}
                     className="aspect-[3/4] w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
@@ -296,28 +321,26 @@ export default function AboutPage() {
           <SectionHeader title="Client Words" className="mb-10 sm:mb-16" />
           <div ref={testimonialsRef} className="grid gap-4 sm:gap-6 lg:grid-cols-3">
             {testimonials.map((t) => (
-              <div
-                key={t.client}
-                className="testimonial-card rounded bg-white p-6 sm:p-8"
-              >
+              <figure key={t.client} className="testimonial-card rounded bg-white p-6 sm:p-8">
                 <span
                   className="font-['Newsreader'] text-5xl font-light leading-[0.5] text-[#00523C] opacity-15 sm:text-6xl"
                   aria-hidden="true"
                 >
                   &ldquo;
                 </span>
-                <p className="mt-4 font-['Inter'] text-[15px] italic leading-relaxed text-[#212121] sm:text-base">
+                <blockquote className="mt-4 font-['Inter'] text-[15px] italic leading-relaxed text-[#212121] sm:text-base">
                   {t.quote}
-                </p>
+                </blockquote>
                 <div className="mx-0 my-4 h-px w-10 bg-[#ECECEC] sm:my-5" />
-                <p className="font-['Newsreader'] text-lg font-light text-[#212121]">{t.client}</p>
-                <p className="mt-1 font-['Inter'] text-[12px] text-[#888888] sm:text-[13px]">{t.property}</p>
-              </div>
+                <figcaption>
+                  <p className="font-['Newsreader'] text-lg font-light text-[#212121]">{t.client}</p>
+                  <p className="mt-1 font-['Inter'] text-[12px] text-[#888888] sm:text-[13px]">{t.property}</p>
+                </figcaption>
+              </figure>
             ))}
           </div>
         </div>
       </section>
-
 
       <section className="bg-white py-16 sm:py-20 lg:py-[120px]">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-6">
@@ -334,10 +357,7 @@ export default function AboutPage() {
                   {bar.name}
                 </span>
                 <div className="flex-1">
-                  <div
-                    className="market-bar h-1.5 rounded-full bg-[#00523C] sm:h-2"
-                    style={{ width: 0 }}
-                  />
+                  <div className="market-bar h-1.5 rounded-full bg-[#00523C] sm:h-2" style={{ width: 0 }} />
                 </div>
                 <span className="min-w-[32px] text-right font-['Inter'] text-[12px] text-[#888888] sm:min-w-[40px] sm:text-[13px]">
                   {bar.transactions}
@@ -346,57 +366,47 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Summary numbers */}
           <div className="mt-10 text-center sm:mt-12">
             <p className="font-['Newsreader'] text-[36px] font-light text-[#00523C] sm:text-5xl">
               500+ Transactions
             </p>
             <p className="mt-1 font-['Newsreader'] text-[24px] font-light text-[#212121] sm:mt-2 sm:text-[32px]">
-              100Cr+ in Sales
+              ₹100Cr+ in Sales
             </p>
           </div>
         </div>
       </section>
 
-
       <section ref={ctaRef} className="bg-[#00523C] py-16 sm:py-20">
         <div className="mx-auto max-w-[700px] px-5 text-center sm:px-6">
-          <h2
-            className="font-['Newsreader'] text-[36px] font-light text-white sm:text-5xl"
-            style={{ lineHeight: 1.1 }}
-          >
-            Let's Discuss Your Next Move
+          <h2 className="font-['Newsreader'] text-[36px] font-light text-white sm:text-5xl" style={{ lineHeight: 1.1 }}>
+            Let&apos;s Discuss Your Next Move
           </h2>
 
-          {/* Contact method icons — stack on mobile, row on md */}
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:mt-10 md:grid-cols-3 md:gap-12">
-
+          <address className="mt-8 grid grid-cols-1 gap-6 not-italic sm:mt-10 md:grid-cols-3 md:gap-12">
             <div className="text-center">
               <PhoneIcon />
               <p className="mt-2 font-['Newsreader'] text-lg font-light text-white sm:text-xl">
-                +91 94190 00000
+                <a href="tel:+919419000000" className="hover:opacity-80">
+                  +91 94190 00000
+                </a>
               </p>
-              <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">
-                Mon–Sat, 9am–7pm IST
-              </p>
+              <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">Mon–Sat, 9am–7pm IST</p>
             </div>
 
-            {/* Divider — only on desktop */}
             <div className="hidden items-center justify-center md:flex">
               <div className="h-full w-px bg-white/20" />
             </div>
-
-            {/* Mobile divider between items */}
             <div className="h-px w-16 mx-auto bg-white/20 md:hidden" />
 
             <div className="text-center">
               <MailIcon />
               <p className="mt-2 font-['Newsreader'] text-lg font-light text-white sm:text-xl">
-                hello@realestate-srinagar.com
+                <a href="mailto:hello@realestate-srinagar.com" className="hover:opacity-80">
+                  hello@realestate-srinagar.com
+                </a>
               </p>
-              <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">
-                We respond within 24 hours
-              </p>
+              <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">We respond within 24 hours</p>
             </div>
 
             <div className="h-px w-16 mx-auto bg-white/20 md:hidden" />
@@ -406,11 +416,9 @@ export default function AboutPage() {
               <p className="mt-2 font-['Newsreader'] text-lg font-light text-white sm:text-xl">
                 Residency Road, Srinagar
               </p>
-              <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">
-                J&K 190001, India
-              </p>
+              <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">J&amp;K 190001, India</p>
             </div>
-          </div>
+          </address>
 
           <button className="mt-8 w-full rounded-full bg-white px-8 py-3.5 font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] text-[#00523C] transition-all hover:bg-white/90 active:scale-[0.98] sm:mt-10 sm:w-auto">
             Schedule a Consultation

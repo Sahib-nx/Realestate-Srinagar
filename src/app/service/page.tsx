@@ -1,4 +1,4 @@
-import ServicePage from "@/pages/ServicePage"
+import ServicePage from "@/compppPages/ServicePage"
 
 export default function Page() {
   return <ServicePage />

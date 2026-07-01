@@ -10,42 +10,18 @@ import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const services = [
-  {
-    number: '01',
-    title: 'Buyer Representation',
-    description:
-      'Dedicated advocacy through every step of your home purchase. From off-market opportunities to closing, we ensure your interests are protected and your goals are met.',
-  },
-  {
-    number: '02',
-    title: 'Seller Advisory',
-    description:
-      "Strategic positioning, professional staging coordination, and targeted marketing to maximize your property's value and minimize time on market.",
-  },
-  {
-    number: '03',
-    title: 'Construction & Development',
-    description:
-      "Turn your vision into reality with our dedicated construction services. We manage residential and commercial projects from the ground up. By combining modern engineering standards with an appreciation for local aesthetics, we ensure structural integrity, timely delivery, and exceptional design.",
-  },
-  // {
-  //   number: '03',
-  //   title: 'Market Intelligence',
-  //   description:
-  //     "Data-driven insights into Srinagar's most desirable neighborhoods. We provide comprehensive market analysis to inform your most important real estate decisions.",
-  // },
-]
+type Service = {
+  number: string
+  title: string
+  description: string
+}
 
-const neighborhoods: Neighborhood[] = [
-  { name: 'Tarrytown', avgPrice: '$2.1M', listings: 8, tagline: 'Historic elegance, lakefront living', image: '/assets/hood-tarrytown.jpg' },
-  { name: 'Westlake', avgPrice: '$3.4M', listings: 5, tagline: 'Hill Country estates, top schools', image: '/assets/hood-westlake.jpg' },
-  { name: 'Hyde Park', avgPrice: '$850K', listings: 15, tagline: 'Bungalow charm, walkable streets', image: '/assets/hood-hyde.jpg' },
-  { name: 'Barton Creek', avgPrice: '$2.8M', listings: 6, tagline: 'Resort living, golf course views', image: '/assets/hood-barton.jpg' },
-  { name: 'Clarksville', avgPrice: '$1.5M', listings: 10, tagline: 'Downtown adjacent, historic homes', image: '/assets/hood-clarksville.jpg' },
-]
+interface HomeAnimationsProps {
+  services: Service[]
+  neighborhoods: Neighborhood[]
+}
 
-export default function HomePage() {
+export default function HomeAnimations({ services, neighborhoods }: HomeAnimationsProps) {
   const heroRef = useRef<HTMLDivElement>(null)
   const heroContentRef = useRef<HTMLDivElement>(null)
   const aboutRef = useScrollReveal<HTMLDivElement>({ childSelector: '.about-reveal' })
@@ -77,7 +53,6 @@ export default function HomePage() {
           <source src="/assets/hero-entrance.mp4" type="video/mp4" />
         </video>
 
-        {/* Gradient: slightly stronger on mobile for readability */}
         <div
           className="absolute inset-0"
           style={{
@@ -91,7 +66,6 @@ export default function HomePage() {
           style={{ opacity: 0 }}
         >
           <div className="mx-auto max-w-[1400px]">
-            {/* Responsive headline: 36px mobile → 48px sm → 60px md+ */}
             <h1
               className="max-w-[90vw] font-['Newsreader'] text-[36px] font-light leading-[1.1] text-white sm:max-w-[540px] sm:text-5xl md:max-w-[600px] md:text-6xl"
               style={{ textShadow: '0 2px 20px rgba(0,0,0,0.3)' }}
@@ -99,7 +73,6 @@ export default function HomePage() {
               Local Expertise, Global Reach
             </h1>
 
-            {/* Subtitle: hidden on very small screens to reduce clutter */}
             <p
               className="mt-3 hidden max-w-[480px] font-['Inter'] text-base text-white/90 sm:mt-4 sm:block sm:text-lg"
               style={{ textShadow: '0 1px 10px rgba(0,0,0,0.2)' }}
@@ -107,13 +80,11 @@ export default function HomePage() {
               Curated luxury homes, strategic investments, and unmatched real estate expertise across Srinagar, Jammu, Delhi, Dholera, Dubai, and beyond.
             </p>
 
-            {/* Show a short version on tiny screens */}
             <p
               className="mt-3 font-['Inter'] text-sm text-white/80 sm:hidden"
               style={{ textShadow: '0 1px 10px rgba(0,0,0,0.2)' }}
             >
               Curated luxury homes, strategic investments, and unmatched real estate expertise across Srinagar, Jammu, Delhi, Dholera, Dubai, and beyond.
-
             </p>
 
             <a
@@ -167,8 +138,6 @@ export default function HomePage() {
       <section className="bg-white py-16 sm:py-20 lg:py-[120px]">
         <div ref={aboutRef} className="mx-auto max-w-[1400px] px-5 sm:px-6">
           <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-[55%_45%]">
-
-            {/* Image — comes first on mobile (natural DOM order) */}
             <div className="about-reveal overflow-hidden rounded">
               <img
                 src="/assets/austin-skyline.jpg"
@@ -177,7 +146,6 @@ export default function HomePage() {
               />
             </div>
 
-            {/* Text block */}
             <div className="about-reveal">
               <span className="font-['Inter'] text-[12px] font-medium uppercase tracking-[0.05em] text-[#00523C] sm:text-[13px]">
                 ABOUT Realestate Srinagar
@@ -272,7 +240,6 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-
 
             <div
               className="pointer-events-none absolute right-0 top-0 hidden h-full w-[60px] sm:block"

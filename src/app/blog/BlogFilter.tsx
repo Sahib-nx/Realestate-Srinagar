@@ -1,18 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-
-type Post = {
-  _id: string
-  title: string
-  slug: string
-  excerpt: string
-  category: string
-  author: string
-  coverImage: string
-  createdAt: string
-}
+import type { PlainPost } from '@/lib/getPosts'
 
 const CATEGORIES = ['All', 'Achievement', 'Company Update', 'Market Insight', 'Advice']
 
@@ -31,51 +21,14 @@ function formatDate(iso: string) {
   })
 }
 
-export default function BlogPage() {
-  const [posts, setPosts] = useState<Post[]>([])
+export default function BlogFilter({ posts }: { posts: PlainPost[] }) {
   const [active, setActive] = useState('All')
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    fetch('/api/blog')
-      .then((r) => r.json())
-      .then((data) => {
-        setPosts(Array.isArray(data) ? data : [])
-        setLoading(false)
-      })
-  }, [])
 
   const filtered = active === 'All' ? posts : posts.filter((p) => p.category === active)
   const [hero, ...rest] = filtered
 
   return (
-    <div className="min-h-screen bg-white">
-
-      {/* ── Page Header ───────────────────────────────────────────────── */}
-      <div className="bg-[#F8F8F8] py-16 sm:py-24">
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-6">
-          <span className="font-['Inter'] text-[12px] font-medium uppercase tracking-[0.08em] text-[#00523C]">
-            Insights &amp; Updates
-          </span>
-          <h1 className="mt-4 font-['Newsreader'] text-[42px] font-light leading-[1.1] text-[#212121] sm:text-6xl">
-            From Our Desk
-          </h1>
-          <p className="mt-4 max-w-[520px] font-['Inter'] text-[15px] leading-relaxed text-[#888888] sm:text-base">
-            Achievements, market intelligence, and real estate advice from Srinagar's most trusted
-            independent brokerage.
-          </p>
-
-          {/* Breadcrumb for SEO */}
-          <nav aria-label="Breadcrumb" className="mt-6 sm:mt-8">
-            <ol className="flex items-center gap-2 font-['Inter'] text-[11px] text-[#00523C] sm:text-[12px]">
-              <li><Link href="/" className="hover:text-white/70 transition-colors">Home</Link></li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="text-[#00523C]">Blog</li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-
+    <>
       {/* ── Category Filter ───────────────────────────────────────────── */}
       <div className="sticky top-0 z-20 border-b border-[#ECECEC] bg-white">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-6">
@@ -84,10 +37,12 @@ export default function BlogPage() {
               <button
                 key={cat}
                 onClick={() => setActive(cat)}
-                className={`flex-shrink-0 rounded-full px-4 py-2 font-['Inter'] text-[12px] font-medium uppercase tracking-[0.05em] transition-all duration-200 sm:text-[13px] ${active === cat
+                aria-pressed={active === cat}
+                className={`flex-shrink-0 rounded-full px-4 py-2 font-['Inter'] text-[12px] font-medium uppercase tracking-[0.05em] transition-all duration-200 sm:text-[13px] ${
+                  active === cat
                     ? 'bg-[#00523C] text-white'
                     : 'text-[#888888] hover:text-[#212121]'
-                  }`}
+                }`}
               >
                 {cat}
               </button>
@@ -97,19 +52,13 @@ export default function BlogPage() {
       </div>
 
       <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-6 sm:py-16">
-        {loading && (
-          <div className="flex items-center justify-center py-24">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#00523C] border-t-transparent" />
-          </div>
-        )}
-
-        {!loading && filtered.length === 0 && (
+        {filtered.length === 0 && (
           <div className="py-24 text-center">
             <p className="font-['Newsreader'] text-2xl text-[#888888]">No posts yet in this category.</p>
           </div>
         )}
 
-        {!loading && hero && (
+        {hero && (
           <>
             {/* ── Hero Post ───────────────────────────────────────────── */}
             <Link href={`/blog/${hero.slug}`} className="group mb-12 block sm:mb-16 lg:mb-20">
@@ -119,6 +68,8 @@ export default function BlogPage() {
                     <img
                       src={hero.coverImage}
                       alt={hero.title}
+                      loading="eager"
+                      fetchPriority="high"
                       className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                   ) : (
@@ -135,9 +86,12 @@ export default function BlogPage() {
                     >
                       {hero.category}
                     </span>
-                    <span className="font-['Inter'] text-[12px] text-[#888888]">
+                    <time
+                      dateTime={hero.createdAt}
+                      className="font-['Inter'] text-[12px] text-[#888888]"
+                    >
                       {formatDate(hero.createdAt)}
-                    </span>
+                    </time>
                   </div>
                   <h2 className="mt-4 font-['Newsreader'] text-[32px] font-light leading-[1.15] text-[#212121] transition-colors group-hover:text-[#00523C] sm:text-[40px]">
                     {hero.title}
@@ -164,16 +118,13 @@ export default function BlogPage() {
             {/* ── Rest of Posts Grid ──────────────────────────────────── */}
             <div className="grid gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3 lg:gap-12">
               {rest.map((post) => (
-                <Link
-                  key={post._id}
-                  href={`/blog/${post.slug}`}
-                  className="group flex flex-col"
-                >
+                <Link key={post._id} href={`/blog/${post.slug}`} className="group flex flex-col">
                   <div className="overflow-hidden rounded">
                     {post.coverImage ? (
                       <img
                         src={post.coverImage}
                         alt={post.title}
+                        loading="lazy"
                         className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                       />
                     ) : (
@@ -189,9 +140,12 @@ export default function BlogPage() {
                     >
                       {post.category}
                     </span>
-                    <span className="font-['Inter'] text-[12px] text-[#888888]">
+                    <time
+                      dateTime={post.createdAt}
+                      className="font-['Inter'] text-[12px] text-[#888888]"
+                    >
                       {formatDate(post.createdAt)}
-                    </span>
+                    </time>
                   </div>
                   <h3 className="mt-3 font-['Newsreader'] text-[22px] font-light leading-[1.2] text-[#212121] transition-colors group-hover:text-[#00523C] sm:text-[26px]">
                     {post.title}
@@ -208,21 +162,6 @@ export default function BlogPage() {
           </>
         )}
       </div>
-
-      {/* ── CTA Strip ─────────────────────────────────────────────────── */}
-      <section className="bg-[#00523C] py-12 sm:py-16">
-        <div className="mx-auto max-w-[800px] px-5 text-center sm:px-6">
-          <h2 className="font-['Newsreader'] text-[28px] font-light text-white sm:text-4xl">
-            Ready to Find Your Home in Srinagar?
-          </h2>
-          <a
-            href="/contact"
-            className="mt-6 inline-block rounded-full bg-white px-8 py-3.5 font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] text-[#00523C] transition-all hover:bg-white/90"
-          >
-            Get in Touch
-          </a>
-        </div>
-      </section>
-    </div>
+    </>
   )
 }

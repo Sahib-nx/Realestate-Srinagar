@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useScrollReveal } from '../hooks/useScrollReveal'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -13,22 +13,73 @@ const contactMethods = [
     number: '01',
     title: 'Call Us',
     description: 'Speak directly with one of our agents. Available Monday through Saturday, 9am to 7pm.',
-    detail: '+91 94190 00000',
-    href: 'tel:+919419000000',
+    detail: '+91 7889902696',
+    href: 'tel:+917889902696',
   },
   {
     number: '02',
     title: 'Email',
     description: 'Send us your inquiry and expect a thoughtful response within one business day.',
-    detail: 'hello@realestate-srinagar.com',
-    href: 'mailto:hello@realestate-srinagar.com',
+    detail: 'realestatessrinagar@gmail.com',
+    href: 'mailto:realestatessrinagar@gmail.com',
   },
   {
     number: '03',
     title: 'Visit Us',
     description: 'Our office is located in the heart of Srinagar. Walk-ins welcome during business hours.',
-    detail: 'Residency Road, Srinagar, J&K 190001',
-    href: 'https://maps.google.com',
+    detail: 'Al Sitaar Complex, Hyderpora, Srinagar, J&K 190009',
+    href: 'https://maps.app.goo.gl/zJ8MTp4bBGD4vd4UA',
+  },
+]
+
+// ── Social links — icon, label (for a11y), href ─────────────────────────────
+const socialLinks = [
+  {
+    name: 'WhatsApp',
+    href: 'https://wa.me/917889902696',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.67c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.42 5.82c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.55 3.7-8.24 8.24-8.24Zm-4.5 4.6c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.03s.87 2.36.99 2.52c.12.16 1.7 2.68 4.19 3.65 2.07.81 2.49.65 2.94.61.45-.04 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.71-1.67-.8-.22-.08-.39-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.36-.76-1.86-.2-.48-.4-.42-.55-.43-.14-.01-.3-.01-.46-.01Z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Instagram',
+    href: 'https://www.instagram.com/realestate_srinagar',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="3.8" />
+        <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Facebook',
+    href: 'https://www.facebook.com/realestae.srinagar',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M13.5 21v-7.6h2.55l.38-2.96h-2.93V8.55c0-.86.24-1.44 1.47-1.44h1.57V4.46A21 21 0 0 0 14.3 4.3c-2.24 0-3.78 1.37-3.78 3.87v2.16H7.97v2.96h2.55V21h3Z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/company/realestate-srinagar',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6.94 8.5H3.56V20.4h3.38V8.5ZM5.25 3.6a1.96 1.96 0 1 0 0 3.92 1.96 1.96 0 0 0 0-3.92ZM20.45 20.4h-3.37v-6.24c0-1.49-.03-3.4-2.07-3.4-2.08 0-2.4 1.62-2.4 3.3v6.34H9.24V8.5h3.24v1.63h.05c.45-.86 1.56-1.77 3.21-1.77 3.44 0 4.07 2.26 4.07 5.2v6.84Z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'YouTube',
+    href: 'https://www.youtube.com/@realestatesrinagar',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M22.5 12s0-2.75-.35-4.06a2.8 2.8 0 0 0-1.97-1.98C18.87 5.6 12 5.6 12 5.6s-6.87 0-8.18.36a2.8 2.8 0 0 0-1.97 1.98C1.5 9.25 1.5 12 1.5 12s0 2.75.35 4.06a2.8 2.8 0 0 0 1.97 1.98c1.31.36 8.18.36 8.18.36s6.87 0 8.18-.36a2.8 2.8 0 0 0 1.97-1.98C22.5 14.75 22.5 12 22.5 12ZM9.9 15.3V8.7l5.73 3.3-5.73 3.3Z" />
+      </svg>
+    ),
   },
 ]
 
@@ -55,7 +106,7 @@ const initialForm: FormData = {
 // ── Status type ───────────────────────────────────────────────────────────────
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
-export default function ContactPage() {
+export default function ContactPageClient() {
   const heroRef = useRef<HTMLDivElement>(null)
   const heroContentRef = useRef<HTMLDivElement>(null)
   const [form, setForm] = useState<FormData>(initialForm)
@@ -220,6 +271,28 @@ export default function ContactPage() {
                 Fill out the form and one of our advisors will reach out within 24 hours. We respect your time and your privacy.
               </p>
 
+              {/* ── Social icons row ──────────────────────────── */}
+              <div className="mt-6 sm:mt-8">
+                <p className="font-['Inter'] text-[11px] font-medium uppercase tracking-[0.08em] text-[#888888] sm:text-[12px]">
+                  Follow Us
+                </p>
+                <div className="mt-3 flex flex-wrap items-center gap-2.5 sm:gap-3">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Realestate Srinagar on ${social.name}`}
+                      title={social.name}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-[#ECECEC] bg-white text-[#00523C] transition-all duration-200 hover:border-[#00523C] hover:bg-[#00523C] hover:text-white sm:h-11 sm:w-11"
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
               {/* Stats strip — scrollable on mobile */}
               <div className="mt-8 flex gap-6 overflow-x-auto border-t border-[#ECECEC] pt-8 sm:mt-12 sm:gap-8 sm:pt-10">
                 <div className="flex-shrink-0">
@@ -251,10 +324,10 @@ export default function ContactPage() {
                 <div>
                   <p className="font-['Inter'] text-[14px] font-medium text-[#212121] sm:text-[15px]">Mr. Khan</p>
                   <p className="mt-0.5 font-['Inter'] text-[12px] text-[#888888] sm:text-[13px]">
-                    Senior Advisor · Luxury Division
+                    Senior Advisor · Realestate Srinagar
                   </p>
                   <a
-                    href="tel:+919419000000"
+                    href="tel:+919469882237"
                     className="mt-1.5 inline-block font-['Inter'] text-[12px] font-medium uppercase tracking-[0.04em] text-[#00523C] underline-offset-4 hover:underline sm:mt-2 sm:text-[13px]"
                   >
                     Call Directly &rarr;

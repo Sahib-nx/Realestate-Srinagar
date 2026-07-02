@@ -89,7 +89,7 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-1.5">
             <Image
-              src="/assets/LogoHouse.png"
+              src="/assets/LOGO1.png"
               alt="Realestate Srinagar"
               width={28}
               height={28}

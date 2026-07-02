@@ -137,7 +137,7 @@ export default function AdminBlogPage() {
         <div className="w-full max-w-[380px] rounded bg-white p-8 shadow-sm">
           <Link href="/" className="flex items-center gap-1.5">
             <Image
-              src="/assets/LogoHouse.png"
+              src="/assets/LOGO1.png"
               alt="Realestate Srinagar"
               width={28}
               height={28}

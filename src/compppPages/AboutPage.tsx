@@ -74,7 +74,7 @@ function StructuredData() {
     '@type': 'RealEstateAgent',
     name: 'Realestate Srinagar',
     url: SITE_URL,
-    logo: `${SITE_URL}/assets/logo.png`,
+    logo: `${SITE_URL}/assets/LOGO1.png`,
     image: OG_IMAGE,
     description:
       'Independent, fiduciary-first real estate brokerage serving Srinagar, Jammu, Delhi, Dholera, and Dubai since 2017.',

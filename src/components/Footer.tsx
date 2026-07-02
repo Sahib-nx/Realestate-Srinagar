@@ -99,7 +99,7 @@ export default function Footer() {
       <div className="mx-auto max-w-[1400px] px-6 py-20 pb-10">
         <Link href="/" className="flex items-center gap-1.5">
           <Image
-            src="/assets/LogoHouse1.png"
+            src="/assets/LOGO1.png"
             alt="Realestate Srinagar"
             width={28}
             height={28}

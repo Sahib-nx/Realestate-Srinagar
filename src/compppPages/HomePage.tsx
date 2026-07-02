@@ -78,7 +78,7 @@ function getJsonLd() {
     '@id': `${SITE_URL}/#organization`,
     name: SITE_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/assets/logo.png`,
+    logo: `${SITE_URL}/assets/LOGO1.png`,
     image: `${SITE_URL}/assets/hero-og-image.jpg`,
     description:
       'Independent luxury real estate brokerage serving Srinagar, Jammu, Delhi, Dholera, and Dubai since 2017. Buyer representation, seller advisory, and construction & development services.',

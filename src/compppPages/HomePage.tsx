@@ -149,11 +149,11 @@ const services = [
 ]
 
 const neighborhoods = [
-  { name: 'Tarrytown', avgPrice: '$2.1M', listings: 8, tagline: 'Historic elegance, lakefront living', image: '/assets/hood-tarrytown.jpg' },
-  { name: 'Westlake', avgPrice: '$3.4M', listings: 5, tagline: 'Hill Country estates, top schools', image: '/assets/hood-westlake.jpg' },
-  { name: 'Hyde Park', avgPrice: '$850K', listings: 15, tagline: 'Bungalow charm, walkable streets', image: '/assets/hood-hyde.jpg' },
-  { name: 'Barton Creek', avgPrice: '$2.8M', listings: 6, tagline: 'Resort living, golf course views', image: '/assets/hood-barton.jpg' },
-  { name: 'Clarksville', avgPrice: '$1.5M', listings: 10, tagline: 'Downtown adjacent, historic homes', image: '/assets/hood-clarksville.jpg' },
+  { slug: 'rajbagh', name: 'Rajbagh', avgPrice: '₹2.5Cr', listings: 12, tagline: 'Premium Civil Lines residential & commercial hub', image: '/assets/about-office.jpg' },
+  { slug: 'gupkar', name: 'Gupkar', avgPrice: '₹8.0Cr', listings: 4, tagline: 'The ultimate power address of Kashmir', image: '/assets/hood-westlake.jpg' },
+  { slug: 'nishat', name: 'Nishat', avgPrice: '₹4.5Cr', listings: 6, tagline: 'Scenic lakefront living and premium estate zone', image: '/assets/hood-tarrytown.jpg' },
+  { slug: 'sanat-nagar', name: 'Sanat Nagar', avgPrice: '₹1.8Cr', listings: 15, tagline: 'Posh residential colony with top-tier infrastructure', image: '/assets/hood-barton.jpg' },
+  { slug: 'parraypora', name: 'Parraypora', avgPrice: '₹2.2Cr', listings: 9, tagline: 'The educational heart and commercial retail hub', image: '/assets/hood-clarksville.jpg' },
 ]
 
 export default function HomePage() {

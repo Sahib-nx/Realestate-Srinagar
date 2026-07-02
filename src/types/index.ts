@@ -15,6 +15,7 @@ export interface Property {
 }
 
 export interface Neighborhood {
+  slug: string
   name: string
   avgPrice: string
   listings: number

@@ -559,12 +559,6 @@ export default function ContactPageClient() {
           </p>
           <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
             <a
-              href="/properties"
-              className="rounded-full bg-white px-8 py-3.5 font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] text-[#00523C] transition-all duration-200 hover:bg-white/90"
-            >
-              Browse Properties
-            </a>
-            <a
               href="/about"
               className="rounded-full border border-white/40 px-8 py-3.5 font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] text-white transition-all duration-200 hover:border-white"
             >

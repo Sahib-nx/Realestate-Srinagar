@@ -216,9 +216,10 @@ export default function HomeAnimations({ services, neighborhoods }: HomeAnimatio
               style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}
             >
               {neighborhoods.map((hood) => (
-                <div
-                  key={hood.name}
-                  className="hood-card w-[272px] flex-shrink-0 overflow-hidden rounded bg-white transition-transform duration-200 hover:-translate-y-1 sm:w-[320px]"
+                <Link
+                  href={`/areas/${hood.slug}`}
+                  key={hood.slug}
+                  className="hood-card w-[272px] flex-shrink-0 overflow-hidden rounded bg-white transition-transform duration-200 hover:-translate-y-1 sm:w-[320px] block"
                   style={{ scrollSnapAlign: 'start' }}
                 >
                   <img
@@ -237,7 +238,7 @@ export default function HomeAnimations({ services, neighborhoods }: HomeAnimatio
                       {hood.tagline}
                     </p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 

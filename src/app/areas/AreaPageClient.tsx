@@ -43,23 +43,52 @@ export default function AreaPageClient({ data }: AreaPageClientProps) {
     }
   }, [data.slug])
 
-  // JSON-LD structured data for local SEO
+  // Dynamic location parsing for local SEO JSON-LD schema
+  let addressLocality = data.name;
+  let addressRegion = 'Jammu and Kashmir';
+  let addressCountry = 'IN';
+  let geoAddress = `${data.name}, Srinagar, J&K, India`;
+  let placeName = `${data.name}, Srinagar`;
+
+  if (data.slug === 'delhi') {
+    addressLocality = 'New Delhi';
+    addressRegion = 'Delhi NCR';
+    geoAddress = 'New Delhi, Delhi, India';
+    placeName = 'Delhi';
+  } else if (data.slug === 'dubai') {
+    addressLocality = 'Dubai';
+    addressRegion = 'Dubai';
+    addressCountry = 'AE';
+    geoAddress = 'Dubai, United Arab Emirates';
+    placeName = 'Dubai';
+  } else if (data.slug === 'dholera') {
+    addressLocality = 'Dholera';
+    addressRegion = 'Gujarat';
+    geoAddress = 'Dholera SIR, Gujarat, India';
+    placeName = 'Dholera';
+  } else if (data.slug === 'jammu') {
+    addressLocality = 'Jammu';
+    addressRegion = 'Jammu and Kashmir';
+    geoAddress = 'Jammu, J&K, India';
+    placeName = 'Jammu';
+  }
+
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Place",
-    "name": `${data.name}, Srinagar`,
+    "name": placeName,
     "description": data.metaDescription,
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": data.name,
-      "addressRegion": "Jammu and Kashmir",
-      "addressCountry": "IN"
+      "addressLocality": addressLocality,
+      "addressRegion": addressRegion,
+      "addressCountry": addressCountry
     },
     "geo": {
       "@type": "GeoCircle",
       "geoMidpoint": {
         "@type": "GeoCoordinates",
-        "address": `${data.name}, Srinagar, J&K, India`
+        "address": geoAddress
       }
     }
   }

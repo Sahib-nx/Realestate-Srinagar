@@ -8,7 +8,9 @@ export interface AreaData {
   trends: string;
   places: string[];
   image: string;
+  updatedAt?: string;
 }
+
 
 export const areasData: Record<string, AreaData> = {
   rajbagh: {

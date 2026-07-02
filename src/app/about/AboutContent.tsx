@@ -377,52 +377,67 @@ export default function AboutContent() {
         </div>
       </section>
 
-      <section ref={ctaRef} className="bg-[#00523C] py-16 sm:py-20">
-        <div className="mx-auto max-w-[700px] px-5 text-center sm:px-6">
-          <h2 className="font-['Newsreader'] text-[36px] font-light text-white sm:text-5xl" style={{ lineHeight: 1.1 }}>
+      <section ref={ctaRef} className="bg-[#00523C] py-14 sm:py-20">
+        <div className="mx-auto max-w-[700px] px-5 text-center sm:max-w-[900px] sm:px-8 lg:max-w-[1040px] lg:px-6">
+          <h2
+            className="font-['Newsreader'] text-[30px] font-light leading-[1.15] text-white xs:text-[34px] sm:text-5xl sm:leading-[1.1]"
+          >
             Let&apos;s Discuss Your Next Move
           </h2>
 
-          <address className="mt-8 grid grid-cols-1 gap-6 not-italic sm:mt-10 md:grid-cols-3 md:gap-12">
-            <div className="text-center">
+          <address className="mt-8 flex flex-col gap-8 not-italic sm:mt-10 sm:flex-row sm:items-start sm:justify-between sm:gap-4 md:gap-8 lg:gap-12">
+            <div className="flex-1 text-center">
               <PhoneIcon />
-              <p className="mt-2 font-['Newsreader'] text-lg font-light text-white sm:text-xl">
-                <a href="tel:+919419000000" className="hover:opacity-80">
-                  +91 7889902696, +91 7006064638
+              <div className="mt-2 flex flex-col items-center gap-0.5 font-['Newsreader'] text-base font-light text-white xs:text-lg sm:text-lg lg:text-xl">
+                <a href="tel:+917889902696" className="hover:opacity-80">
+                  +91 78899 02696
                 </a>
+                <a href="tel:+917006064638" className="hover:opacity-80">
+                  +91 70060 64638
+                </a>
+              </div>
+              <p className="mt-1 font-['Inter'] text-[11px] text-white/70 xs:text-[12px] sm:text-[12px] lg:text-[13px]">
+                Mon–Sat, 9am–7pm IST
               </p>
-              <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">Mon–Sat, 9am–7pm IST</p>
             </div>
 
-            <div className="hidden items-center justify-center md:flex">
-              <div className="h-full w-px bg-white/20" />
-            </div>
-            <div className="h-px w-16 mx-auto bg-white/20 md:hidden" />
+            <div className="hidden w-px bg-white/20 sm:block self-stretch" />
+            <div className="mx-auto h-px w-16 bg-white/20 sm:hidden" />
 
-            <div className="text-center">
+            <div className="flex-1 text-center">
               <MailIcon />
-              <p className="mt-2 font-['Newsreader'] text-lg font-light text-white sm:text-xl">
-                <a href="mailto:hello@realestate-srinagar.com" className="hover:opacity-80">
+              <p className="mt-2 break-words font-['Newsreader'] text-base font-light text-white xs:text-lg sm:text-lg lg:text-xl">
+                <a href="mailto:realestatessrinagar@gmail.com" className="hover:opacity-80">
                   realestatessrinagar@gmail.com
                 </a>
               </p>
-              <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">We respond within 24 hours</p>
+              <p className="mt-1 font-['Inter'] text-[11px] text-white/70 xs:text-[12px] sm:text-[12px] lg:text-[13px]">
+                We respond within 24 hours
+              </p>
             </div>
 
-            <div className="h-px w-16 mx-auto bg-white/20 md:hidden" />
+            <div className="hidden w-px bg-white/20 sm:block self-stretch" />
+            <div className="mx-auto h-px w-16 bg-white/20 sm:hidden" />
 
-            <div className="text-center">
+            <div className="flex-1 text-center">
               <LocationIcon />
-              <p className="mt-2 font-['Newsreader'] text-lg font-light text-white sm:text-xl">
+              <p className="mt-2 font-['Newsreader'] text-base font-light text-white xs:text-lg sm:text-lg lg:text-xl">
                 Al Sitaar Complex, Hyderpora
               </p>
-              <p className="mt-1 font-['Inter'] text-[12px] text-white/70 sm:text-[13px]">J&amp;K 190009, Srinagar</p>
+              <p className="mt-1 font-['Inter'] text-[11px] text-white/70 xs:text-[12px] sm:text-[12px] lg:text-[13px]">
+                J&amp;K 190009, Srinagar
+              </p>
             </div>
           </address>
 
-          <button className="mt-8 w-full rounded-full bg-white px-8 py-3.5 font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] text-[#00523C] transition-all hover:bg-white/90 active:scale-[0.98] sm:mt-10 sm:w-auto">
-            Schedule a Consultation
-          </button>
+          <div className="mt-10 flex justify-center sm:mt-16">
+            <a
+              href="/contact"
+              className="w-full rounded-full bg-white px-8 py-3.5 text-center font-['Inter'] text-[13px] font-medium uppercase tracking-[0.05em] text-[#00523C] transition-all hover:bg-white/90 active:scale-[0.98] sm:w-auto"
+            >
+              Schedule a Consultation
+            </a>
+          </div>
         </div>
       </section>
     </div>

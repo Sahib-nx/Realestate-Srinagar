@@ -1,14 +1,11 @@
-import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import AreaPageClient from '../AreaPageClient'
 import { areasData } from '../AreaData'
+import { getAreaMetadata } from '../seoHelper'
 
 const slug = 'rajbagh';
 
-export const metadata: Metadata = {
-  title: `${areasData[slug]?.name} Real Estate | Realestate Srinagar`,
-  description: areasData[slug]?.metaDescription,
-}
+export const metadata = getAreaMetadata(slug);
 
 export default function Page() {
   const data = areasData[slug]

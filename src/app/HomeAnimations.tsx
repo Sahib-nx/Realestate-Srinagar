@@ -140,7 +140,7 @@ export default function HomeAnimations({ services, neighborhoods }: HomeAnimatio
           <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-[55%_45%]">
             <div className="about-reveal overflow-hidden rounded">
               <img
-                src="/assets/austin-skyline.jpg"
+                src="/assets/AboutImg.jpeg"
                 alt="Srinagar Skyline"
                 className="aspect-[3/2] w-full object-cover sm:aspect-[4/3]"
               />
